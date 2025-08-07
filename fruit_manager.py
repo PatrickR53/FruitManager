@@ -57,7 +57,7 @@ if __name__ == "__main__":
     afficher_inventaire(inventaire)
     
     recolter(inventaire, "bananes", 10)
-    recolter(inventaire, "banoix de coco", 10)
+    recolter(inventaire, "noix de coco", 10)
     
     inventaire, tresorerie = vendre(inventaire, "noix de coco", 15, tresorerie, prix)
     
