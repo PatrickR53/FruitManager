@@ -101,7 +101,7 @@ def vendre_tout(inventaire, tresorerie, prix):
             inventaire[fruit] = 0
     return inventaire, tresorerie
 
-def valeur_stock(inventaire, prix)
+def valeur_stock(inventaire, prix):
     valeur = {}
     valeur_stock = 0.0
     for fruit in inventaire:
