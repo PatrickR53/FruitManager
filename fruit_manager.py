@@ -86,7 +86,17 @@ def vendre_tout(inventaire, tresorerie, prix):
              tresorerie += revenu
              print(f" - {fruit.capitalize()} : vendu {quantite} unités pour {revenu:.2f}")
              inventaire[fruit] = 0
-    return
+    return inventaire, tresorerie
+
+def valeur_stock(inventaire, prix)
+    valeur = {}
+    valeur_stock = 0.0
+    for fruit in inventaire:
+        quantite = inventaire[fruit]
+        prix_unitaire = prix.get(fruit, 0)
+        valeur[fruit] = quantite * prix_unitaire
+        valeur_stock += valeur[fruit]
+    return valeur, valeur_stock
 
 if __name__ == "__main__":
     
