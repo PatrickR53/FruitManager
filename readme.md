@@ -1,2 +1,2 @@
 #  🍇 Fruit Manager
-Bienvenue sur **Fruit Manager**, un gestionnaire de plantation exotique pour gérer votre plantation de Fruits !!
+Bienvenue sur **Fruit Manager**, un gestionnaire de plantation exotique pour gérer votre plantation de Fruits ! Ce projet, développé avec streamlit, vous permet de suivre votre inventaire, vendre et récolter des fruits, et surveiller votre trésorerie en temps réel.
