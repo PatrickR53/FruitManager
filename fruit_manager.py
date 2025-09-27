@@ -1,10 +1,38 @@
 import json
 import os
+import datetime
 
 DATA_DIR = "data"
 PRIX_PATH = os.path.join(DATA_DIR, "prix.json")
 INVENTAIRE_PATH = os.path.join(DATA_DIR, "inventaire.json")
 TRESORERIE_PATH = os.path.join(DATA_DIR, "tresorerie.txt")
+
+
+def enregistrer_tresorerie_historique(
+    tresorerie, fichier="data/tresorerie_history.json"
+):
+    historique = []
+    if os.path.exists(fichier):
+        with open(fichier, "r") as f:
+            try:
+                historique = json.load(f)
+            except:
+                historique = []
+    historique.append(
+        {"timestamp": datetime.datetime.now().isoformat(), "tresorerie": tresorerie}
+    )
+    with open(fichier, "w") as f:
+        json.dump(historique, f)
+
+
+def lire_tresorerie_historique(fichier="data/tresorerie_history.json"):
+    if os.path.exists(fichier):
+        with open(fichier, "r") as f:
+            try:
+                return json.load(f)
+            except:
+                return []
+    return []
 
 
 def ouvrir_inventaire(path=INVENTAIRE_PATH):
@@ -75,12 +103,14 @@ def afficher_inventaire(inventaire):
 def recolter(inventaire, fruit, quantite):
     inventaire[fruit] = inventaire.get(fruit, 0) + quantite
     print(f"\n ✅ Récolté {quantite} {fruit} supplémentaire(s) !")
+    return inventaire
 
 
 def vendre(inventaire, fruit, quantite, tresorerie, prix):
     if inventaire.get(fruit, 0) >= quantite:
         inventaire[fruit] -= quantite
         tresorerie += prix.get(fruit, 0) * quantite
+        enregistrer_tresorerie_historique(tresorerie)
         print(f"\n 💰 Vendu {quantite} {fruit} au prix {prix.get(fruit, 0)} $!")
         return (inventaire, tresorerie)
     else:
@@ -99,7 +129,9 @@ def vendre_tout(inventaire, tresorerie, prix):
                 f" - {fruit.capitalize()} : vendu {quantite} unités pour {revenu:.2f}"
             )
             inventaire[fruit] = 0
+    enregistrer_tresorerie_historique(tresorerie)
     return inventaire, tresorerie
+
 
 def valeur_stock(inventaire, prix):
     valeur = {}
@@ -127,8 +159,8 @@ if __name__ == "__main__":
     afficher_tresorerie(tresorerie)
     afficher_inventaire(inventaire)
 
-    recolter(inventaire, "bananes", 10)
-    recolter(inventaire, "noix de coco", 10)
+    inventaire = recolter(inventaire, "bananes", 10)
+    inventaire = recolter(inventaire, "noix de coco", 10)
 
     inventaire, tresorerie = vendre(inventaire, "noix de coco", 15, tresorerie, prix)
 
