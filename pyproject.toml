@@ -10,10 +10,14 @@ requires-python = ">=3.12"
 dependencies = [
     "streamlit (>=1.47.0,<2.0.0)",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "matplotlib (>=3.10.6,<4. .0)",
 =======
     "matplotlib (>=3.10.6,<4.0.0)",
 >>>>>>> 5642c2f (Ajout des messages dans l'application streamlit + correction bug)
+=======
+    "matplotlib (>=3.10.6,<4.0.0)",
+>>>>>>> 5642c2fb1ac4f8aca1300c8ed78aa3b3c303fab8
     "datetime (>=5.5,<6.0)"
 ]
 
