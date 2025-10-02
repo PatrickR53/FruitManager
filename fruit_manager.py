@@ -104,6 +104,7 @@ def recolter(inventaire, fruit, quantite):
     inventaire[fruit] = inventaire.get(fruit, 0) + quantite
     message = {'status': 'succes', 'text': f"\nRécolté {quantite} {fruit} supplémentaires !"}
     print(f"\n ✅ Récolté {quantite} {fruit} supplémentaire(s) !")
+    return(inventaire, message)
 
 
 def vendre(inventaire, fruit, quantite, tresorerie, prix):
