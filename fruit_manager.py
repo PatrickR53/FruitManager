@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 
 DATA_DIR = "data"
 PRIX_PATH = os.path.join(DATA_DIR, "prix.json")
@@ -74,7 +75,9 @@ def afficher_inventaire(inventaire):
 
 def recolter(inventaire, fruit, quantite):
     inventaire[fruit] = inventaire.get(fruit, 0) + quantite
+    message = {'status': 'succes', 'text': f"\nRécolté {quantite} {fruit} supplémentaires !"}
     print(f"\n ✅ Récolté {quantite} {fruit} supplémentaire(s) !")
+    return (inventaire, message)
 
 
 def vendre(inventaire, fruit, quantite, tresorerie, prix):
@@ -82,11 +85,14 @@ def vendre(inventaire, fruit, quantite, tresorerie, prix):
         inventaire[fruit] -= quantite
         tresorerie += prix.get(fruit, 0) * quantite
         print(f"\n 💰 Vendu {quantite} {fruit} au prix {prix.get(fruit, 0)} $!")
-        return (inventaire, tresorerie)
+        message = {'status': 'succes', 'text': f"\nVendu {quantite} {fruit} !"}
+        return (inventaire, tresorerie, message)
     else:
         print(
             f"\n 🚨 quantite insuffisante de {fruit} pour vendre {quantite} unité(s) !"
         )
+        message = {'status': 'error', 'text': f"\nPas assez de {fruit} pour en vendre {quantite}."}
+        return (inventaire, tresorerie, message)
 
 
 def vendre_tout(inventaire, tresorerie, prix):
